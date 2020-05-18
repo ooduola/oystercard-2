@@ -9,7 +9,14 @@ describe Oystercard do
     it 'returns default value of 0' do
       expect(subject.balance).to eq(0)
     end
-  context '#top_up'do
+
+    it 'return new balance when we add top_up argument' do
+      top_up_value = 100
+      subject.top_up(top_up_value)
+      expect(subject.balance).to eq(100)
+    end
+
+  context '#top_up' do
     it 'subject respond to top_up method' do
       expect(subject).to respond_to(:top_up).with(1).argument
     end
