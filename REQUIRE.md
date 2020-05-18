@@ -11,3 +11,14 @@ I want money on my card
 Objects	(nouns) - class	|  Messages (verbs) - methods
 
 card                      balance
+
+
+Write a new test that checks that if a top_up method is invoked with the top up value as the argument, the balance of the card will increase by that amount.
+
+In order to keep using public transport
+As a customer
+I want to add money to my card
+
+Objects	(nouns) - class	|  Messages (verbs) - methods
+
+card                      top_up
