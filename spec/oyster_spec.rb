@@ -4,6 +4,12 @@ describe Oystercard do
   it 'Test if card responds to balance method' do
     expect(subject).to respond_to(:balance)
   end
+
+  context '#balance' do 
+    it 'returns default value of 0' do
+      expect(subject.balance).to eq(0)
+    end
+  end
 end
 
 =begin
