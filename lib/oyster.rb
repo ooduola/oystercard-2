@@ -7,9 +7,16 @@ class Oystercard
      @balance = default_balance
   end
 
-
   def top_up(top_up_value)
+   #@top_up_value = top_up_value
    @balance += top_up_value
+   raise RuntimeError if max_value?
+  end
+
+  private
+
+  def max_value?
+    @balance > 90 #|| @top_up_value > 90
   end
 
 end

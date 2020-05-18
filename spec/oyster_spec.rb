@@ -14,11 +14,13 @@ describe Oystercard do
     it 'subject respond to top_up method' do
       expect(subject).to respond_to(:top_up).with(1).argument
     end
-    
+    it 'raise error when balance in over 90£' do
+      expect { subject.top_up(100) > subject.balance}.to raise_error(RuntimeError)
+    end
+
     it 'return new balance when we add top_up argument' do
       expect{ subject.top_up 1 }.to change{ subject.balance }.by 1
      end
-
 
   end
   end
