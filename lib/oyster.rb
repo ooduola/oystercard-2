@@ -13,6 +13,10 @@ class Oystercard
    raise RuntimeError if max_value?
   end
 
+  def deduct
+
+  end
+
   private
 
   def max_value?

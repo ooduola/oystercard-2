@@ -5,6 +5,10 @@ describe Oystercard do
     expect(subject).to respond_to(:balance)
   end
 
+  it 'responds to the deduct method' do 
+    expect(subject).to respond_to(:deduct)
+  end
+
   context '#balance' do
     it 'returns default value of 0' do
       expect(subject.balance).to eq(0)
