@@ -13,6 +13,7 @@ describe Oystercard do
     it 'returns default value of 0' do
       expect(subject.balance).to eq(0)
     end
+  end
 
   context '#top_up' do
     it 'subject respond to top_up method' do
@@ -35,10 +36,27 @@ describe Oystercard do
     it 'retruns false for new card' do
       expect(subject.in_journey?).to eq false
     end
-
-
    end
- end
+
+   context '#touch_in' do
+     it 'responds to Oystercard' do
+       expect(subject).to respond_to(:touch_in)
+     end
+     
+     it 'returns in_journey to equal true' do
+       expect(subject.touch_in).to eq(in_journey = true)
+     end
+    end
+
+    context '#touch_out' do
+      it 'respond to Oystercard' do
+        expect(subject).to respond_to(:touch_out)
+      end
+
+      it 'returns in_journey to equal false' do
+        expect(subject.touch_out).to eq(in_journey = false)
+      end
+    end
 end
 
 # =being
