@@ -1,7 +1,8 @@
 class Oystercard
 
-  attr_reader :balance
+  attr_reader :balance, :in_journey
   DEFAULT_BALANCE_VALUE = 0
+  MINIUM_BALANCE = 1
 
   def initialize(default_balance = DEFAULT_BALANCE_VALUE)
      @balance = default_balance
@@ -19,9 +20,12 @@ class Oystercard
   end
 
   def touch_in
+    # fail "Error" if
+    raise "Error" if balance_checker?
     @in_journey = true
-  end 
-  
+
+  end
+
   def touch_out
     @in_journey = false
   end
@@ -31,6 +35,10 @@ class Oystercard
   end
 
   private
+
+  def balance_checker?
+    @balance < MINIUM_BALANCE
+  end
 
   def max_value?
     @balance > 90 #|| @top_up_value > 90

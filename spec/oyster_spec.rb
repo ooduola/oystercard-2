@@ -42,8 +42,14 @@ describe Oystercard do
      it 'responds to Oystercard' do
        expect(subject).to respond_to(:touch_in)
      end
-     
+
+    it 'raises an error if below minimum' do
+      expect{ subject.touch_in }.to raise_error "Error"
+    end
+
      it 'returns in_journey to equal true' do
+       MINIUM_BALANCE = 1
+       subject.top_up(MINIUM_BALANCE)
        expect(subject.touch_in).to eq(in_journey = true)
      end
     end
