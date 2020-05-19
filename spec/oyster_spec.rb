@@ -4,9 +4,15 @@ describe Oystercard do
   it 'Test if card responds to balance method' do
     expect(subject).to respond_to(:balance)
   end
-
-  it 'responds to the deduct method' do
-    expect(subject).to respond_to(:deduct)
+  
+  context '#deduct' do
+    it 'responds to the deduct method' do
+      expect(subject).to respond_to(:deduct).with(1).argument
+    end
+    
+    it 'reduces the balance by value of argument' do
+      expect{ subject.deduct 5 }.to change{ subject.balance }.by -5
+    end
   end
 
   context '#balance' do
@@ -44,12 +50,12 @@ describe Oystercard do
      end
 
     it 'raises an error if below minimum' do
-      expect{ subject.touch_in }.to raise_error "Error"
+      expect{ subject.touch_in }.to raise_error "You're balance is too low."
     end
 
      it 'returns in_journey to equal true' do
-       MINIUM_BALANCE = 1
-       subject.top_up(MINIUM_BALANCE)
+       MINIMUM_BALANCE = 1
+       subject.top_up(MINIMUM_BALANCE)
        expect(subject.touch_in).to eq(in_journey = true)
      end
     end
