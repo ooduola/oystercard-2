@@ -11,19 +11,20 @@ class Oystercard
   end
 
   def top_up(top_up_balance)
-   @balance += top_up_balance
-   puts "Your balance has been topped up by #{top_up_balance}"
-   raise RuntimeError if max_value?
+    raise RuntimeError if max_value(top_up_balance)
+
+    @balance += top_up_balance
+    "Your balance has been topped up by #{top_up_balance}"
   end
 
   def touch_in(entry_station)
-    raise "You're balance is too low." if balance_checker?
+    raise "You're balance is too low." if balance_checker
 
     @entry_station = entry_station
   end
 
   def touch_out
-    @balance -= MINIMUM_FARE
+    deduct_fare
     @entry_station = nil
   end
 
@@ -33,17 +34,17 @@ class Oystercard
 
   private
 
-  def deduct(deduct_balance)
-    @balance -= deduct_balance
-    puts "Your balance has been deducted by #{deduct_balance}"
+  def max_value(top_up_balance)
+    @balance + top_up_balance > MAXIMUM_BALANCE
   end
 
-  def balance_checker?
+  def deduct_fare
+    @balance -= MINIMUM_FARE
+    "Your balance has been deducted by #{MINIMUM_FARE}"
+  end
+
+  def balance_checker
     @balance < MINIMUM_BALANCE
-  end
-
-  def max_value?
-    @balance >  MAXIMUM_BALANCE
   end
 
 end

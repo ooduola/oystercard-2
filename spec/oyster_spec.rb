@@ -14,8 +14,8 @@ describe Oystercard do
 
   context '#top_up' do
     it { is_expected.to respond_to :top_up }
-    it 'raise error when balance in over 90£' do
-      expect { subject.top_up(100) > subject.balance}.to raise_error(RuntimeError)
+    it 'raise error when balance is over 90' do
+      expect { subject.top_up(91) }.to raise_error(RuntimeError)
     end
 
     it 'return new balance when we add top_up argument' do
@@ -48,7 +48,6 @@ describe Oystercard do
     context '#touch_out' do
       it 'returns in_journey to equal false' do
         card.touch_in(station)
-        # card.touch_out
         expect(subject).not_to be_in_journey
       end
 
