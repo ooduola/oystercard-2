@@ -3,8 +3,20 @@ require 'oyster'
 describe Oystercard do
   let(:card) { Oystercard.new(50) }
   let(:station) { double :station }
+  let(:exit_station) { double :station }
+  let(:entry_station) { double :station }
 
   it { is_expected.to respond_to :balance }
+
+  it 'returns empty list by default' do 
+    expect(card.journeys).to be_empty
+  end
+
+  it 'return completed journey' do
+    card.touch_in(entry_station)
+    card.touch_out(exit_station)
+    expect(card.journeys).to eq [{entry_station: entry_station, exit_station: exit_station}]
+  end
 
   context '#balance' do
     it 'returns default value of 0' do
@@ -52,13 +64,21 @@ describe Oystercard do
       end
 
       it 'reduce balance by minimum fare' do
-        expect {subject.touch_out}.to change{subject.balance}.by(-Oystercard::MINIMUM_FARE)
+        expect {card.touch_out(exit_station)}.to change{card.balance}.by(-Oystercard::MINIMUM_FARE)
       end
 
       it 'should change #entry_station to nil' do
         card.touch_in(station)
-        card.touch_out
+        card.touch_out(exit_station)
         expect(card.entry_station).to eq nil
+      end
+
+      it 'stores exit station' do
+        card.touch_in(entry_station)
+        card.touch_out(exit_station)
+        expect(card.exit_station).to eq exit_station
       end
     end
 end
+
+
