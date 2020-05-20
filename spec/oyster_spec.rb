@@ -5,15 +5,15 @@ describe Oystercard do
     expect(subject).to respond_to(:balance)
   end
   
-  context '#deduct' do
-    it 'responds to the deduct method' do
-      expect(subject).to respond_to(:deduct).with(1).argument
-    end
+  # context '#deduct' do
+  #   it 'responds to the deduct method' do
+  #     expect(subject).to respond_to(:deduct).with(1).argument
+  #   end
     
-    it 'reduces the balance by value of argument' do
-      expect{ subject.deduct 5 }.to change{ subject.balance }.by -5
-    end
-  end
+  #   it 'reduces the balance by value of argument' do
+  #     expect{ subject.deduct 5 }.to change{ subject.balance }.by -5
+  #   end
+  # end
 
   context '#balance' do
     it 'returns default value of 0' do
@@ -54,19 +54,21 @@ describe Oystercard do
     end
 
      it 'returns in_journey to equal true' do
-       MINIMUM_BALANCE = 1
-       subject.top_up(MINIMUM_BALANCE)
+       subject.top_up(Oystercard::MINIMUM_BALANCE)
        expect(subject.touch_in).to eq(in_journey = true)
      end
     end
 
     context '#touch_out' do
-      it 'respond to Oystercard' do
-        expect(subject).to respond_to(:touch_out)
-      end
-
+      # it 'respond to Oystercard' do
+      #   expect(subject).to respond_to(:touch_out)
+      # end
       it 'returns in_journey to equal false' do
         expect(subject.touch_out).to eq(in_journey = false)
+      end
+
+      it 'reduce balance by minimum fare' do
+        expect {subject.touch_out}.to change{subject.balance}.by(-Oystercard::MINIMUM_FARE)
       end
     end
 end

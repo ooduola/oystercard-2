@@ -3,6 +3,8 @@ class Oystercard
   attr_reader :balance, :in_journey
   DEFAULT_BALANCE_VALUE = 0
   MINIMUM_BALANCE = 1
+  MAXIMUM_BALANCE = 90
+  MINIMUM_FARE = 1
 
   def initialize(default_balance = DEFAULT_BALANCE_VALUE)
      @balance = default_balance
@@ -15,17 +17,13 @@ class Oystercard
    raise RuntimeError if max_value?
   end
 
-  def deduct(deduct_balance)
-    @balance -= deduct_balance
-    puts "Your balance has been deducted by #{deduct_balance}"
-  end
-
   def touch_in
     raise "You're balance is too low." if balance_checker?
     @in_journey = true
   end
 
   def touch_out
+    @balance -= MINIMUM_FARE
     @in_journey = false
   end
 
@@ -35,12 +33,17 @@ class Oystercard
 
   private
 
+  def deduct(deduct_balance)
+    @balance -= deduct_balance
+    puts "Your balance has been deducted by #{deduct_balance}"
+  end
+
   def balance_checker?
     @balance < MINIMUM_BALANCE
   end
 
   def max_value?
-    @balance > 90
+    @balance >  MAXIMUM_BALANCE
   end
 
 end
