@@ -17,7 +17,7 @@ describe Journey do
 
     it 'records entry station' do
       subject.start_journey(entry_station)
-      expect(subject.journey_history[:"entry_station"]).to eq(entry_station)
+      expect(subject.current_journey[:"entry_station"]).to eq(entry_station)
     end
   end
 
@@ -28,19 +28,19 @@ describe Journey do
 
     it 'returns exit station' do
       subject.finish_journey(exit_station)
-      expect(subject.journey_history[:"exit_station"] ).to eq(exit_station)
+      expect(subject.current_journey[:"exit_station"] ).to eq(exit_station)
     end
   end
 
-  context '#journey_history' do
+  context '#current_journey' do
     it 'does not have any journeys stored on initialize' do
-      expect(subject.journey_history).to be_empty
+      expect(subject.current_journey).to be_empty
     end
 
     it 'stores entry and exit stations in a hash' do
       subject.start_journey(entry_station)
       subject.finish_journey(exit_station)
-      expect(subject.journey_history).to eq(
+      expect(subject.current_journey).to eq(
         {:"entry_station" => entry_station,
           :"exit_station" => exit_station}
         )

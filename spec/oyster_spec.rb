@@ -8,7 +8,7 @@ describe Oystercard do
 
   it { is_expected.to respond_to :balance }
 
-  it 'returns empty list by default' do 
+  it 'returns empty list by default' do
     expect(card.journeys).to be_empty
   end
 
@@ -64,6 +64,7 @@ describe Oystercard do
       end
 
       it 'reduce balance by minimum fare' do
+        card.touch_in(station)
         expect {card.touch_out(exit_station)}.to change{card.balance}.by(-Oystercard::MINIMUM_FARE)
       end
 
@@ -80,5 +81,3 @@ describe Oystercard do
       end
     end
 end
-
-

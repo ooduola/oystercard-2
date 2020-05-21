@@ -1,7 +1,10 @@
+# this is linking to journey.rb
+require_relative 'journey'
+
 class Oystercard
 
   attr_reader :balance, :entry_station, :journeys, :exit_station
-  DEFAULT_BALANCE_VALUE = 0 
+  DEFAULT_BALANCE_VALUE = 0
   MINIMUM_BALANCE = 1
   MAXIMUM_BALANCE = 90
   MINIMUM_FARE = 1
@@ -21,13 +24,18 @@ class Oystercard
   def touch_in(entry_station)
     raise "You're balance is too low." if balance_checker
     @entry_station = entry_station
+    # this is from Journey class:
+    @journey = Journey.new
+    @journey.start_journey(entry_station)
   end
 
   def touch_out(exit_station)
     deduct_fare
     @exit_station = exit_station
-    @journeys << { entry_station: touch_in(entry_station), exit_station: exit_station }
+    @journeys << { entry_station: entry_station, exit_station: exit_station }
     @entry_station = nil
+    # this is from Journey class:
+    @journey.finish_journey(exit_station)
   end
 
   def in_journey?

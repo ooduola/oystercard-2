@@ -18,7 +18,6 @@ tell us whether or not in_journey?
  - {:"entry_station" => entry_station
  :"exit_station" => exit_station
 
-   exit}
 
 
 
