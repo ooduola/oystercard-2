@@ -5,6 +5,11 @@ describe Journey do
   let(:entry_station) { "London Bridge" }
   let(:exit_station) {"New Cross"}
 
+  it 'responds to in_journey?' do
+    expect(subject).to respond_to(:in_journey?)
+  end
+
+
   context '#start_journey' do
     it 'takes a entry station as an argument' do
       expect(subject).to respond_to(:start_journey).with(1).argument
@@ -12,7 +17,7 @@ describe Journey do
 
     it 'records entry station' do
       subject.start_journey(entry_station)
-      expect(subject.entry_station).to eq(entry_station)
+      expect(subject.journey_history[:"entry_station"]).to eq(entry_station)
     end
   end
 
@@ -23,7 +28,7 @@ describe Journey do
 
     it 'returns exit station' do
       subject.finish_journey(exit_station)
-      expect(subject.exit_station).to eq(exit_station)
+      expect(subject.journey_history[:"exit_station"] ).to eq(exit_station)
     end
   end
 
@@ -39,6 +44,18 @@ describe Journey do
         {:"entry_station" => entry_station,
           :"exit_station" => exit_station}
         )
+    end
+  end
+
+  context '#in_journey?' do
+    it 'returns true after start journey' do
+      subject.start_journey(entry_station)
+      expect(subject.in_journey?).to eq(true)
+    end
+
+    it 'returns false after finish journey' do
+      subject.finish_journey(exit_station)
+      expect(subject.in_journey?).to eq(false)
     end
   end
 end
