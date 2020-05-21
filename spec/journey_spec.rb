@@ -9,23 +9,36 @@ describe Journey do
     it 'takes a entry station as an argument' do
       expect(subject).to respond_to(:start_journey).with(1).argument
     end
-  end
 
-  context '#finish_journey' do 
-    it 'takes exit station as argument' do
-      expect(subject).to respond_to(:finish_journey).with(1).argument
+    it 'records entry station' do
+      subject.start_journey(entry_station)
+      expect(subject.entry_station).to eq(entry_station)
     end
   end
 
-  it 'records entry station' do
-    subject.start_journey(entry_station)
-    expect(subject.entry_station).to eq(entry_station)
+  context '#finish_journey' do
+    it 'takes exit station as argument' do
+      expect(subject).to respond_to(:finish_journey).with(1).argument
+    end
+
+    it 'returns exit station' do
+      subject.finish_journey(exit_station)
+      expect(subject.exit_station).to eq(exit_station)
+    end
   end
 
-  it 'returns exit station' do
-    subject.finish_journey(exit_station)
-    expect(subject.exit_station).to eq(exit_station)
-  end
+  context '#journey_history' do
+    it 'does not have any journeys stored on initialize' do
+      expect(subject.journey_history).to be_empty
+    end
 
+    it 'stores entry and exit stations in a hash' do
+      subject.start_journey(entry_station)
+      subject.finish_journey(exit_station)
+      expect(subject.journey_history).to eq(
+        {:"entry_station" => entry_station,
+          :"exit_station" => exit_station}
+        )
+    end
+  end
 end
-

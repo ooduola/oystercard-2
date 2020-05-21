@@ -1,11 +1,11 @@
 Oystercard class - journey-related methods
-Class Journey 
+Class Journey
 
 functions
 
-Start a journey. 
+Start a journey.
  - Arugment which accepts station
- 
+
 Finish a journey
  - Argument which accepts station
 
@@ -13,7 +13,12 @@ Calculate the journey fare.
 
 tell us whether or not in_journey?
  - Boolean
- 
+
+ store the journeys
+ - {:"entry_station" => entry_station
+ :"exit_station" => exit_station
+
+   exit}
 
 
 
@@ -46,7 +51,7 @@ Points to consider
 
 Let's create a new Journey class, it should be responsible for starting a journey, finishing a journey, calculating the fare of a journey, and returning whether or not the journey is complete.
 
-Extract - Class checklist 
+Extract - Class checklist
 Step 1
 Determine what to extract
 Find logical units of data which are grouped together or operations which are performed on a subset of the data.
