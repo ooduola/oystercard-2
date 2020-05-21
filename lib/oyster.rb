@@ -39,7 +39,7 @@ class Oystercard
   end
 
   def in_journey?
-   !!@entry_station
+    !!@journey ?  @journey.in_journey? : false
   end
 
   private

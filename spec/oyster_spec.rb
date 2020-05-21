@@ -5,6 +5,9 @@ describe Oystercard do
   let(:station) { double :station }
   let(:exit_station) { double :station }
   let(:entry_station) { double :station }
+  # let(:touch_in_card) do 
+  #   card.touch_in(entry_station)
+  # end
 
   it { is_expected.to respond_to :balance }
 
