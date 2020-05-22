@@ -11,15 +11,15 @@ Finish a journey
 
 Calculate the journey fare.
 
-tell us whether or not in_journey?
+tell us whether or not in_journey? - DONE
  - Boolean
+ -
 
- store the journeys
+ store the journeys DONE
  - {:"entry_station" => entry_station
  :"exit_station" => exit_station
 
-
-
+   exit}
 
 
 
