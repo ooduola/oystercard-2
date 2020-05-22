@@ -32,7 +32,7 @@ class Oystercard
   def touch_out(exit_station)
     deduct_fare
     @exit_station = exit_station
-    @journeys << { entry_station: entry_station, exit_station: exit_station }
+    @journeys << @journey.current_journey
     @entry_station = nil
     # this is from Journey class:
     @journey.finish_journey(exit_station)
@@ -53,8 +53,8 @@ class Oystercard
   end
 
   def deduct_fare
-    @balance -= MINIMUM_FARE
-    "Your balance has been deducted by #{MINIMUM_FARE}"
+    @balance -= fare
+    "Your balance has been deducted by #{fare}"
   end
 
   def balance_checker
