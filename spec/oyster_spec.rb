@@ -1,4 +1,4 @@
-require 'oyster'
+require 'oystercard'
 
 describe Oystercard do
   let(:card) { Oystercard.new(50) }
@@ -81,6 +81,19 @@ describe Oystercard do
         card.touch_in(entry_station)
         card.touch_out(exit_station)
         expect(card.exit_station).to eq exit_station
+      end
+    end
+
+    context '#fare' do
+      it 'responds to card object' do
+        expect(subject).to respond_to(:fare)
+      end
+
+      it 'returns the minimum fare value on completed journey' do
+        minimum_fare = Oystercard::MINIMUM_FARE
+        card.touch_in(entry_station)
+        card.touch_out(exit_station)
+        expect(card.fare).to eq(minimum_fare)
       end
     end
 end

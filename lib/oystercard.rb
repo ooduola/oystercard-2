@@ -42,6 +42,10 @@ class Oystercard
     !!@journey ?  @journey.in_journey? : false
   end
 
+  def fare
+    MINIMUM_FARE
+  end
+
   private
 
   def max_value(top_up_balance)
